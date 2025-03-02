@@ -1,0 +1,27 @@
+function catMouse(map,moves){
+  let catX = 0
+  let catY = 0
+  let mouseX = 0
+  let mouseY = 0
+  let hasMouse = false
+  let hasCat = false
+  let rows = map.split('\n')
+  for(let i = 0; i < rows.length; ++i) {
+    let cells = rows[i].split('')
+    for(let j = 0; j < cells.length; ++j) {
+      if(cells[j] === 'C') {
+        catX = j
+        catY = i
+        hasCat = true
+      }
+      else if(cells[j] === 'm') {
+        mouseX = j
+        mouseY = i
+        hasMouse = true
+      }
+    }
+  }
+  if(!hasCat || !hasMouse) return "boring without two animals"
+  let minMoves = Math.abs(catX-mouseX) + Math.abs(catY-mouseY)
+  return (minMoves <= moves) ? "Caught!" : "Escaped!"
+}
